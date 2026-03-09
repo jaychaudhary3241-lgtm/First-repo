@@ -1,159 +1,224 @@
 # 🏙️ CivicReport — Community Issue Reporting Platform
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Status](https://img.shields.io/badge/status-active-brightgreen.svg)
-![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)
-
-> Empowering citizens to report, track, and resolve local civic issues — faster, together.
+> Empowering citizens to report, track, and resolve local civic issues in real time.
 
 ---
 
 ## 📌 Overview
 
-**CivicReport** is a full-stack web application that bridges the gap between citizens and local government authorities. Residents can submit reports about civic problems — potholes, broken streetlights, overflowing garbage, water leaks, and more — while municipal teams can manage, prioritize, and resolve them transparently.
-
-No more lost complaints. No more unanswered calls. Just a direct, accountable channel between communities and the people who serve them.
+**CivicReport** is a full-stack web application that allows citizens to report civic problems (potholes, broken streetlights, water leaks, garbage overflow, etc.) to local authorities. Residents can submit reports with location details and images, while administrators can manage, prioritize, and resolve tickets efficiently.
 
 ---
 
 ## ✨ Features
 
-- 📍 **Geo-tagged Issue Reporting** — Submit issues with precise location using an interactive map or GPS auto-detection
-- 📸 **Photo Uploads** — Attach images to provide visual context for each report
-- 🏷️ **Issue Categorization** — Classify issues by type (roads, sanitation, electricity, water, parks, etc.)
-- 📊 **Real-time Status Tracking** — Follow your report from *Submitted* → *Under Review* → *In Progress* → *Resolved*
-- 🔔 **Notifications** — Get email/SMS updates when your issue status changes
-- 🗺️ **Public Issue Map** — See all reported issues in your area on a live map
-- 👤 **Citizen Dashboard** — Manage all your submitted reports in one place
-- 🛠️ **Admin Panel** — Municipal staff can view, assign, prioritize, and close reports
-- 🗳️ **Upvoting System** — Community members can upvote existing issues to signal urgency
-- 💬 **Comments & Updates** — Authorities can post progress updates; citizens can follow up
+- 📝 **Submit Issue Reports** — Citizens can report civic problems with title, description, category, and location
+- 📍 **Location Tagging** — Attach a specific address or map coordinates to each report
+- 🖼️ **Image Upload** — Attach photo evidence to issue reports
+- 🔄 **Status Tracking** — Track issue progress: `Pending → In Review → In Progress → Resolved`
+- 🔐 **User Authentication** — Secure login and registration for citizens and admins
+- 🛠️ **Admin Dashboard** — Authorities can view, filter, assign, and update issue statuses
+- 📊 **Report Analytics** — Visual summary of issue categories and resolution rates
+- 🔍 **Search & Filter** — Filter issues by category, status, date, or location
+- 📱 **Responsive Design** — Works seamlessly across desktop and mobile devices
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Frontend | React.js / Next.js |
-| Styling | Tailwind CSS |
-| Backend | Node.js + Express / Django |
-| Database | PostgreSQL / MongoDB |
-| Maps | Google Maps API / Leaflet.js + OpenStreetMap |
-| Auth | JWT / OAuth 2.0 |
-| File Storage | AWS S3 / Cloudinary |
-| Notifications | Twilio (SMS) / SendGrid (Email) |
-| Deployment | Vercel / Railway / Docker |
+| Layer       | Technology              |
+|-------------|-------------------------|
+| **Frontend**  | HTML5, CSS3, JavaScript (Vanilla) |
+| **Backend**   | Java (Spring Boot / Jakarta EE)   |
+| **Database**  | PostgreSQL               |
+| **Auth**      | JWT / Session-based Auth |
+| **Build Tool**| Maven / Gradle           |
 
 ---
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js >= 18.x
-- npm or yarn
-- PostgreSQL (or MongoDB)
-- Google Maps API key (or Leaflet for open-source alternative)
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/your-username/civic-report.git
-cd civic-report
-
-# Install dependencies
-npm install
-
-# Set up environment variables
-cp .env.example .env
-# Edit .env with your API keys and database credentials
-
-# Run database migrations
-npm run migrate
-
-# Start the development server
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) to view the app.
-
----
-
-## 🗂️ Project Structure
+## 📁 Project Structure
 
 ```
 civic-report/
-├── client/                  # Frontend (React/Next.js)
-│   ├── components/          # Reusable UI components
-│   ├── pages/               # App routes/pages
-│   └── styles/              # Global styles
-├── server/                  # Backend (Node/Express)
-│   ├── controllers/         # Route handlers
-│   ├── models/              # Database models
-│   ├── routes/              # API endpoints
-│   └── middleware/          # Auth, validation, etc.
-├── prisma/                  # DB schema & migrations
-├── public/                  # Static assets
+│
+├── frontend/
+│   ├── index.html
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   ├── main.js
+│   │   ├── auth.js
+│   │   └── api.js
+│   └── pages/
+│       ├── dashboard.html
+│       ├── report.html
+│       └── admin.html
+│
+├── backend/
+│   └── src/
+│       └── main/
+│           └── java/
+│               └── com/civicreport/
+│                   ├── controller/
+│                   │   ├── IssueController.java
+│                   │   └── UserController.java
+│                   ├── service/
+│                   │   ├── IssueService.java
+│                   │   └── UserService.java
+│                   ├── repository/
+│                   │   ├── IssueRepository.java
+│                   │   └── UserRepository.java
+│                   ├── model/
+│                   │   ├── Issue.java
+│                   │   └── User.java
+│                   └── CivicReportApplication.java
+│
+├── database/
+│   └── schema.sql
+│
 └── README.md
 ```
 
 ---
 
-## 📡 API Endpoints
+## 🗄️ Database Schema (PostgreSQL)
 
-| Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/api/issues` | Fetch all public issues |
-| `POST` | `/api/issues` | Submit a new issue |
-| `GET` | `/api/issues/:id` | Get a specific issue |
-| `PATCH` | `/api/issues/:id/status` | Update issue status (admin) |
-| `POST` | `/api/issues/:id/upvote` | Upvote an issue |
-| `GET` | `/api/issues/map` | Fetch geo-tagged issues for map |
-| `POST` | `/api/auth/register` | Register a new user |
-| `POST` | `/api/auth/login` | User login |
+```sql
+-- Users table
+CREATE TABLE users (
+    id         SERIAL PRIMARY KEY,
+    name       VARCHAR(100) NOT NULL,
+    email      VARCHAR(150) UNIQUE NOT NULL,
+    password   VARCHAR(255) NOT NULL,
+    role       VARCHAR(20) DEFAULT 'CITIZEN',
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Issues table
+CREATE TABLE issues (
+    id          SERIAL PRIMARY KEY,
+    title       VARCHAR(200) NOT NULL,
+    description TEXT,
+    category    VARCHAR(100),
+    status      VARCHAR(50) DEFAULT 'PENDING',
+    location    VARCHAR(255),
+    image_url   VARCHAR(500),
+    reported_by INT REFERENCES users(id),
+    created_at  TIMESTAMP DEFAULT NOW(),
+    updated_at  TIMESTAMP DEFAULT NOW()
+);
+```
 
 ---
 
-## 📷 Screenshots
+## ⚙️ Getting Started
 
-> *(Add your app screenshots here)*
+### Prerequisites
 
-| Citizen Dashboard | Issue Map | Admin Panel |
+- Java 17+
+- PostgreSQL 14+
+- Maven or Gradle
+- A modern web browser
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/civic-report.git
+cd civic-report
+```
+
+### 2. Configure the Database
+
+```bash
+psql -U postgres -c "CREATE DATABASE civicreport;"
+psql -U postgres -d civicreport -f database/schema.sql
+```
+
+### 3. Configure Backend
+
+Update `backend/src/main/resources/application.properties`:
+
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/civicreport
+spring.datasource.username=your_db_username
+spring.datasource.password=your_db_password
+spring.jpa.hibernate.ddl-auto=update
+```
+
+### 4. Run the Backend
+
+```bash
+cd backend
+mvn spring-boot:run
+```
+
+API available at `http://localhost:8080`
+
+### 5. Open the Frontend
+
+```bash
+python -m http.server 3000 --directory frontend
+```
+
+---
+
+## 🔗 API Endpoints
+
+| Method | Endpoint                    | Description                        |
+|--------|-----------------------------|------------------------------------|
+| POST   | `/api/auth/register`        | Register a new user                |
+| POST   | `/api/auth/login`           | Login and receive a token          |
+| GET    | `/api/issues`               | Get all reported issues            |
+| POST   | `/api/issues`               | Submit a new issue report          |
+| GET    | `/api/issues/{id}`          | Get a specific issue by ID         |
+| PUT    | `/api/issues/{id}/status`   | Update issue status (Admin only)   |
+| DELETE | `/api/issues/{id}`          | Delete an issue (Admin only)       |
+| GET    | `/api/issues/my`            | Get issues reported by current user|
+
+---
+
+## 📸 Screenshots
+
+> *(Add screenshots of your app here)*
+
+| Citizen Dashboard | Report Submission | Admin Panel |
 |---|---|---|
-| ![dashboard](#) | ![map](#) | ![admin](#) |
+| ![dashboard](#) | ![report](#) | ![admin](#) |
+
+---
+
+## 🚀 Future Improvements
+
+- [ ] Email/SMS notifications on status updates
+- [ ] Google Maps API integration for live location pinning
+- [ ] Upvoting system so citizens can support existing issues
+- [ ] Export reports to PDF/CSV for authorities
+- [ ] Multi-language support
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome and appreciated! Here's how to get involved:
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/your-feature-name`
-3. Commit your changes: `git commit -m 'Add: your feature description'`
-4. Push to your branch: `git push origin feature/your-feature-name`
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for our code of conduct and contribution guidelines.
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-## 🛡️ License
+## 👤 Author
 
-This project is licensed under the [MIT License](./LICENSE).
-
----
-
-## 🙌 Acknowledgements
-
-- [OpenStreetMap](https://www.openstreetmap.org/) for open-source mapping data
-- [Leaflet.js](https://leafletjs.com/) for the interactive map component
-- All contributors and civic tech enthusiasts who believe in transparent governance
+**Your Name**  
+GitHub: [@yourusername](https://github.com/yourusername)  
+Email: youremail@example.com
 
 ---
 
-> *"Well-functioning cities are built on the voices of their citizens."*
-
-**⭐ Star this repo if you find it useful!**
+> *"Good cities are built by engaged citizens."*
